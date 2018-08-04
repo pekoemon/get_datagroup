@@ -1,0 +1,6 @@
+---
+
+bigip_username: "ansible-user"
+bigip_password: "ansible"
+bigip_port: 443
+validate_certs: "no"

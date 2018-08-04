@@ -1,0 +1,24 @@
+---
+- name: BIG-IP(APM)  Data-Group Configration
+  hosts: big-ip01.internal
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - name: Data-Group FileData Difference Check
+      shell: diff  /root/venv/get_datagroup/file/config.scf  /root/venv/get_datagroup/file/config.scf.old 
+      register: ret
+      failed_when: ret.rc != 1
+
+    - name: Load an SCF configuration
+      bigip_config:
+       merge_content: "{{ lookup('file', '/root/venv/get_datagroup/file/config.scf') }}"
+       password: "{{ bigip_password }}"
+       server: "{{ ansible_host }}"
+       user: "{{ bigip_username }}"
+       validate_certs: "{{ validate_certs }}"
+      delegate_to: localhost
+      register: results
+    
+    - debug: var=results.stdout|first
+      failed_when: '"Syntax Error" in results.stdout|first'

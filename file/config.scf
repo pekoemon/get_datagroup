@@ -1,0 +1,24 @@
+ltm data-group internal test1_udid {
+    records {
+        aaaaaaaaaaaaaaaaaaaaaaa { }
+    }
+    type string
+}
+ltm data-group internal test2_mac {
+    records {
+        11:22:33:44:55:66 {
+            data test01
+        }
+        77:33:22:55:66:77 {
+            data test02
+        }
+    }
+    type string
+}
+ltm data-group internal test3_imei {
+    records {
+        60d14a1227d9a22544a8294c96237c3b1f3860dc { }
+        353667076455251 { }
+    }
+    type string
+}
